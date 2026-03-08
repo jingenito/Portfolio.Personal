@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>There and Back Again</title>
+    <style>
+        /* Import fantasy-style fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+        :root {
+            --ink-color: #2c241b;
+            --parchment-light: #f4ecce;
+            --parchment-dark: #e3d5b1;
+            --border-color: #3b2f24;
+        }
+
+        body {
+            background-color: #111; /* Dark background for the glowing runes */
+            margin: 0;
+            padding: 40px 20px;
+            font-family: 'Lora', serif;
+            color: var(--ink-color);
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden; /* Prevent horizontal scroll from canvas */
+        }
+
+        /* The Canvas Background */
+        #runeCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Keeps the falling runes behind your page */
+        }
+
+        /* The main parchment page */
+        .page-container {
+            background: linear-gradient(135deg, var(--parchment-light), var(--parchment-dark));
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8), inset 0 0 50px rgba(139, 115, 85, 0.4);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            border: 2px solid #c2b280;
+            border-radius: 6px;
+            position: relative;
+            z-index: 1; /* Ensures parchment is above the canvas */
+        }
+
+        /* Decorative outer border */
+        .page-container::before {
+            content: "";
+            position: absolute;
+            top: 12px; bottom: 12px; left: 12px; right: 12px;
+            border: 1px solid rgba(59, 47, 36, 0.4);
+            pointer-events: none;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            margin: 0 0 15px 0;
+            font-weight: 700;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* Central Portrait Layout */
+        .portrait-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .header-title {
+            font-size: 2.5em;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        /* Styling for your uploaded image */
+        .main-portrait {
+            width: 100%;
+            max-width: 500px; /* Keeps the card well-proportioned */
+            border: 4px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: block;
+        }
+
+        /* Grid for the Content Cards */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        /* Hand-drawn style boxes */
+        .card {
+            border: 2px solid var(--border-color);
+            padding: 25px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.15);
+            outline: 1px solid var(--border-color);
+            outline-offset: -6px;
+        }
+
+        .card h2 {
+            font-size: 1.3em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .footer-links a {
+            color: var(--ink-color);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #7a2a2a;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .page-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="runeCanvas"></canvas>
+
+    <div class="page-container">
+        
+        <div class="portrait-section">
+            <div class="header-title">There and Back Again</div>
+            <img src="Tolkien-Profile-Pic.png" alt="Master of Hobbiton Across The Water" class="main-portrait">
+        </div>
+
+        <main class="grid-container">
+            
+            <section class="card">
+                <h2>THE ROAD GOES EVER ON...</h2>
+                <p style="font-style: italic; text-align: center;">
+                    "The road goes ever on and on,<br>
+                    Down from the door where it began..."
+                </p>
+                <p>
+                    Welcome to my digital burrow. I am a traveler who has wandered from the towering, snow-capped peaks of the West to settle 
+                    in the quieter shires of the East coast. Here, I chronicle my adventures, both in the physical realm and the digital ether.
+                </p>
+            </section>
+
+            <section class="card">
+                <h2>FORGES & THE COSMIC FABRIC</h2>
+                <p><strong>[*] The Digital Forge:</strong> When not wandering the woods, I can be found assembling high-end rigs, forging systems with the sheer power of an RTX 4080 to conquer digital realms from Midgar to the Palpagos Islands.</p>
+                <p><strong>[*] The Weight of the Void:</strong> My deeper studies have shifted toward the very fabric of the cosmos—the deep magic of General Relativity. I am diving headfirst into the texts that describe how mass bends the unseen paths of spacetime, deciphering the mathematical runes that govern the motion of the stars.</p>
+            </section>
+
+            <section class="card">
+                <h2>TALES OF THE BARD</h2>
+                <p>
+                    No quest is complete without a song to carry the spirit. My wanderings frequently lead me to the great musical musters of our age—where the thunderous, 
+                    disciplined ranks of the marching drum and bugle hosts gather in Clifton and Allentown, moving with the precision of ancient, gleaming armies. 
+                    Yet, of all the melodies that score my travels, it is the sweeping, orchestral mastery of Howard Shore's The Lord of the Rings that remains my truest companion. 
+                    His music echoes through my halls, weaving a cinematic magic that turns even the quietest days in the Shire into an epic tale.
+                </p>
+                <p>
+                    Within the comfort of my own halls, the minstrelsy never truly fades. Long into the night, I am known to wield a phantom lute—keeping 
+                    the raucous spirit of rock alive through the digital sorcery of Rock Band Deluxe. Yet, true instruments of brass and wood also call to me; 
+                    I sound the clarion notes of the trumpet, command the lightning-infused strings of my electric guitar, and have recently begun to master 
+                    the disciplined, marching cadence of the snare drum.
+                </p>
+            </section>
+
+            <section class="card">
+                <h2>COMPANIONS OF THE BURROW</h2>
+                <p>
+                    Even a seasoned adventurer needs a place to rest. My sanctuary—my own personal Bag-End—is guarded by loyal feline companions, who keep a 
+                    watchful eye over the household from the towering heights of their grand cat tree.
+                </p>
+                <p>
+                    It is here by the hearth that I can often be found cooking up my next hearty meal, or settled into a comfortable chair, lost in the pages of 
+                    <em>The Lord of the Rings</em> and diving ever deeper into the lore of Middle-earth. When my mind isn't unraveling the heavy, unseen mysteries of physics, 
+                    I am resting with a Steam Deck in hand, conquering digital realms. From this quiet burrow, I plot my next great expeditions—whether that means rallying 
+                    behind the Yankees on the great diamond of the Bronx, or simply leveling up on my current quest.
+                </p>
+            </section>
+
+        </main>
+
+        <footer>
+            [*] Crafted with code and magic, Year 1400 Shire Reckoning [*] <br><br>
+            <div class="footer-links">
+                <a href="/SoftwareEngineeringResume.pdf">[Resume]</a>
+                <a href="tutor.josephingenito.com">[Tutor]</a>
+                <a href="mailto:contact@josephingenito.com">[Contact]</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById('runeCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas to full window size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // A collection of Runic characters to emulate the Elvish/Dwarvish feel
+        const runes = "ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛟᛞ".split("");
+
+        const fontSize = 22;
+        const columns = canvas.width / fontSize;
+
+        // Array to track the Y coordinate of each column of drops
+        const drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        // Drawing the animation
+        function draw() {
+            // Translucent black background creates the fading trail effect
+            ctx.fillStyle = "rgba(17, 17, 17, 0.08)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Glowing gold color for the runes
+            ctx.fillStyle = "rgba(212, 175, 55, 0.75)";
+            ctx.font = fontSize + "px serif";
+            ctx.textAlign = "center";
+
+            for (let i = 0; i < drops.length; i++) {
+                // Grab a random rune
+                const text = runes[Math.floor(Math.random() * runes.length)];
+                
+                // Draw the rune
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reset drop to top randomly after it crosses the screen
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                // Move drop down
+                drops[i]++;
+            }
+        }
+
+        // Run the animation loop
+        setInterval(draw, 50);
+
+        // Adjust canvas size if window is resized
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
